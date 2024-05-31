@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:replace="~{include/title.html::title}"></title>
+
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+<link rel="stylesheet" th:href="@{/css/header_nav_footer.css}">
+
+<script type="text/javascript" th:src="@{/js/modify.js}"></script>
+
+</head>
+<body>
+   
+   <header th:replace="~{include/header_nav_footer.html::header}">
+   </header>
+   
+   <nav th:replace="~{include/header_nav_footer.html::nav}">
+   </nav>
+   
+   <article>
+      <div id="article_wrap">
+         
+         <div class="word">
+            <span>ADMIN MODIFY</span>
+         </div>
+         
+         <div class="content">
+            <form action="/admin/adminModifyConfirm" name="admin_modify_form" method="post">
+               <input type="hidden" name="a_no" th:value=${loginedAdminDto.a_no}><br />
+               <input type="text" name="a_id" th:value=${loginedAdminDto.a_id} readonly disabled><br />
+               <input type="password" name="a_pw" placeholder="INPUT ADMIN PW"><br />
+               <input type="email" name="a_mail" th:value=${loginedAdminDto.a_mail} placeholder="INPUT ADMIN MAIL"><br />
+               <input type="text" name="a_phone" th:value=${loginedAdminDto.a_phone} placeholder="INPUT ADMIN PHONE"><br />
+               <input type="button" value="MODIFY" onclick="adminModifyForm();">
+               <input type="reset" value="RESET">      
+            </form>
+         </div>
+         
+         <div class="others">
+            <a href="#none" onclick="adminDeleteConfirm();">DELETE MEMBER</a>
+         </div>
+         
+      </div>
+   </article>
+   
+   <footer th:replace="~{include/header_nav_footer.html::footer}">
+   </footer>
+   
+</body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.office.myorganizeradmin.member.mapper.IMemberMapper">
+
+	<select id="getMemberList" resultType="MemberDto">
+	
+		SELECT 
+			* 
+		FROM 
+			TBL_MEMBER 
+		ORDER BY 
+			M_NO DESC	
+	
+	</select>
+	
+	<update id="memberModifyForRole" parameterType="Map">
+		
+		UPDATE 
+			TBL_MEMBER 
+		SET 
+			M_ROLE = #{m_role},
+			M_MOD_DATE = NOW()
+		WHERE 
+			M_NO = #{m_no}
+	
+	</update>
+
+</mapper>

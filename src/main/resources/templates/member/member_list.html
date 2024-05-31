@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:replace="~{include/title.html::title}"></title>
+
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/member/member_list.css}">
+<link rel="stylesheet" th:href="@{/css/header_nav_footer.css}">
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script type="text/javascript" th:src="@{/js/member_list.js}"></script>
+
+</head>
+<body>
+   
+   <header th:replace="~{include/header_nav_footer.html::header}">
+   </header>
+   
+   <nav th:replace="~{include/header_nav_footer.html::nav}">
+   </nav>
+   
+   <article>
+      <div id="article_wrap">
+         
+         <div class="word">
+            <span>MEMBER LIST</span>
+         </div>
+         
+         <div class="content">
+            <table>
+               <thead>
+                  <tr>
+                     <th>M_NO</th>
+                     <th>M_ID</th>
+                     <th>M_PW</th>
+                     <th>M_MAIL</th>
+                     <th>M_PHONE</th>
+                     <th>M_ROLE</th>
+                     <th>M_REG_DATE</th>
+                     <th>M_MOD_DATE</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr th:each="memberDto : ${memberDtos}">
+                     <td th:text="${memberDto.m_no}"></td>
+                     <td th:text="${memberDto.m_id}"></td>
+                     <td >******</td>
+                     <td th:text="${memberDto.m_mail}"></td>
+                     <td th:text="${memberDto.m_phone}"></td>
+                     <td>
+                        <select th:data-m_no="${memberDto.m_no}">
+                           <option th:value="USER_PENDING" th:text="PENDING" th:selected="${memberDto.m_role} == 'USER_PENDING'"></option>
+                           <option th:value="USER_APPROVED" th:text="APPROVED" th:selected="${memberDto.m_role} == 'USER_APPROVED'"></option>
+                        </select>         
+                     </td>
+                     <td th:text="${memberDto.m_reg_date}"></td>
+                     <td th:text="${memberDto.m_mod_date}"></td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+         
+      </div>
+   </article>
+   
+   <footer th:replace="~{include/header_nav_footer.html::footer}">
+   </footer>
+   
+</body>
+</html>

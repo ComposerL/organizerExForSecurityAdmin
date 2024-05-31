@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.office.myorganizeradmin.admin.mapper.IAdminMapper">
+
+	<select id="isAdmin" parameterType="String" resultType="boolean">
+		
+		SELECT 
+			COUNT(*) AS CNT
+		FROM
+		 	TBL_ADMIN
+		WHERE
+			A_ID = #{a_id}
+		
+	</select>
+	
+	<insert id="adminSignUpConfirm" parameterType="AdminDto">
+		
+		INSERT INTO 
+			TBL_ADMIN(A_ID,A_PW,A_MAIL,A_PHONE <if test="a_id eq 'SuperAdmin'">,A_ROLE</if>)
+		VALUES(#{a_id},#{a_pw},#{a_mail},#{a_phone} <if test="a_id eq 'SuperAdmin'">,"ADMIN_SUPER"</if>)	
+			
+	</insert>
+	
+	<select id="getAdminById" parameterType="String" resultType="AdminDto">
+		
+		SELECT 
+			*
+		FROM 
+			TBL_ADMIN 
+		WHERE 
+			A_ID = #{a_id}
+		
+	</select>
+	
+	<update id="adminModifyConfirm" parameterType="AdminDto">
+	
+		UPDATE 
+			TBL_ADMIN 
+		SET 
+			A_PW = #{a_pw},
+			A_MAIL = #{a_mail},
+			A_PHONE = #{a_phone},
+			A_MOD_DATE = NOW()
+		WHERE 
+			A_NO = #{a_no}
+	
+	</update>
+	
+	<delete id="adminDeleteConfirm" parameterType="String">
+		
+		DELETE FROM 
+			TBL_ADMIN 
+		WHERE 
+			A_ID = #{a_id}
+		
+	</delete>
+	
+	<select id="getAdminList" resultType="AdminDto">
+	
+		SELECT 
+			*
+		FROM 
+		 	TBL_ADMIN
+		 ORDER BY 
+		 	A_NO DESC
+	
+	</select>
+	
+	<update id="adminModifyForRole" parameterType="Map">
+	
+		UPDATE 
+			TBL_ADMIN 
+		SET 
+			A_ROLE = #{a_role},
+			A_MOD_DATE = NOW()
+		WHERE 
+			A_NO = #{a_no}
+	
+	</update>
+
+</mapper>
